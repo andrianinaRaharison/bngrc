@@ -1,23 +1,33 @@
 CREATE DATABASE BNGRC;
 USE BNGRC;
 
-CREATE TABLE dons (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    libelle VARCHAR(100),
-    daty TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-
-);
 CREATE TABLE unite (
     id INT PRIMARY KEY AUTO_INCREMENT,
     ref VARCHAR(20)
+);
+CREATE TABLE objets (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    libelle VARCHAR(100),
+    id_unite INT,
+    FOREIGN KEY (id_unite) REFERENCES unite(id)
+);
+CREATE TABLE dons (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_objet INT,
+    daty TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_objet) REFERENCES objets(id)
+);
+
+CREATE TABLE type_besoin (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nom_type VARCHAR(50)
 );
 
 CREATE TABLE besoins (
     id INT PRIMARY KEY AUTO_INCREMENT,
     prix_unitaire FLOAT,
-    id_unite INT,
-    libelle VARCHAR(100),
-    FOREIGN KEY (id_unite) REFERENCES unite(id)
+    id_objet INT,
+    FOREIGN KEY (id_objet) REFERENCES objets(id)
 );
 
 CREATE TABLE region (
@@ -49,3 +59,4 @@ CREATE TABLE besoins_ville (
     FOREIGN KEY (id_ville) REFERENCES ville(id),
     FOREIGN KEY (id_besoin) REFERENCES besoins(id)
 );
+
