@@ -3,6 +3,7 @@
 use app\controllers\ApiExampleController;
 use app\middlewares\SecurityHeadersMiddleware;
 use app\controllers\BesoinVilleController;
+use app\controllers\BesoinController;
 use flight\Engine;
 use flight\net\Router;
 use app\controllers\DonController;
@@ -33,6 +34,8 @@ $router->group('', function(Router $router) use ($app) {
 	
 	$router->get("/ville-besoin/@id", [VilleController::class, 'renderBesoinByVille']);
 
+  $router->get('/declare-besoin', [BesoinVilleController::class, 'InfoForBesoinDeclaration']);
+   $router->get('/api/unite/@id_objet', [BesoinController::class, 'getUniteForObject']);
   $router->get('/donate',[ UniteController::class, 'getAll' ]);
 
 	$router->get('/dash', [BesoinVilleController::class, 'getVilleBesoin']);
@@ -42,6 +45,7 @@ $router->group('', function(Router $router) use ($app) {
 	});
 
 	$router->post('/donate', [ DonController::class, 'insert' ]);
+	$router->post('/add-besoin', [ BesoinVilleController::class, 'insert' ]);
 
 	$router->group('/api', function() use ($router) {
 		$router->get('/users', [ ApiExampleController::class, 'getUsers' ]);
