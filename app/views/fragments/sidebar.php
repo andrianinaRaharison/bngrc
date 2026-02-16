@@ -21,6 +21,18 @@
                             <span>Collecte de dons</span>
                         </a>
                     </li>
+                     <li class="sidebar-item">
+                        <a href="/declarebesoin" class="sidebar-link">
+                            <i class="bi bi-box-seam-fill"></i>
+                            <span>Déclaration de besoins</span>
+                        </a>
+                    </li>
+                       <li class="sidebar-item">
+                        <a href="/acheter-besoin" class="sidebar-link">
+                            <i class="bi bi-cart-fill"></i>
+                            <span>Achat des besoins</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
