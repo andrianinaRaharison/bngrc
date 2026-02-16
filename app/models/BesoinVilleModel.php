@@ -27,12 +27,18 @@
             return $ret->fetchAll();
         }
 
-        public function donsVille($daty){
-            $ret =  $this->db->prepare("SELECT * FROM dispatch WHERE 1 = 1 +
-                    AND YEAR(daty) = ? AND MONTH(daty) = ? ");
+        public function donsVille(){
+            $ret =  $this->db->prepare("SELECT * FROM dispatch ");
 
-            $ret->execute($daty);
+            $ret->execute();
 
+            return $ret->fetchAll();
+        }
+
+        public function getVilles(){
+            $ret = $this->db->prepare("SELECT id_ville, ville_nom FROM v_besoin_ville_region GROUP BY ville_nom");
+
+            $ret->execute();
             return $ret->fetchAll();
         }
     }
