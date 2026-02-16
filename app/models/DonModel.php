@@ -12,6 +12,7 @@
         public function __construct($db){
             $this->db = $db;
         } 
+
         public function insert(){
             $idUnite = Flight::request()->data->id_unite;
             $quantite = Flight::request()->data->quantite;
@@ -25,6 +26,7 @@
             $ret = Flight::db()->prepare("INSERT INTO dons (id_objet, quantite) VALUES (?, ?)");
             $ret->execute([$idObjet, $quantite]);
         }   
+
         public function getDonsDispo($date){
             $dispatchModel = new DispatchModel($this->db);
             $ret = Flight::db()->prepare("SELECT * FROM dons WHERE daty > ? ");
@@ -33,3 +35,18 @@
    
         }
 
+        public function getById($id){
+            $ret = $this->db->prepare("SELECT * FROM dons WHERE id = ?");
+            $ret->execute([$id]);
+
+            return $ret->fetch();
+        }
+
+        public function getObject($id){
+            $ret = $this->db->prepare("SELECT d.*, o.libelle FROM dons d JOIN objets o ON d.id_objet = o.id WHERE d.id = ?");
+            $ret->execute([$id]);
+
+            return $ret->fetch();
+        }
+
+}

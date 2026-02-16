@@ -4,15 +4,30 @@
 
     use Flight;
     use app\models\BesoinVilleModel;
+    use app\models\BesoinModel;
+    use app\models\DonModel;
 
     class BesoinVilleController{
 
         public function getVilleBesoin(){
             $id = Flight::request()->data->id_ville;
             $besoinModel = new BesoinVilleModel(Flight::db());
-            $besoins = $besoinModel->getByIdVille($id);
+            $besModel = new BesoinModel(Flight::db());
+            $donModel = new DonModel(Flight::db());
 
-            $dons = $besoinModel->donsVille();
+            $Besoins = $besoinModel->getByIdVille($id);
+            $besoins = array();
+
+            foreach($Besoins as $b){
+                $besoins[] = $besModel->getObject($b['id']);
+            }
+
+            $Dons = $besoinModel->donsVille();
+            $dons = array();
+
+            foreach($Dons as $d){
+                $dons[] = $donModel->getObject($d['id']);
+            }
 
             $villes = $besoinModel->getVilles();
 

@@ -19,14 +19,6 @@ $router->group('', function(Router $router) use ($app) {
 	$router->get('/', function() use ($app) {
 		$app->render('dashboard');
 	});
-
-	// $router->get('/dash', function() use ($app) {
-	// 	$app->render('dashboard');
-	// });
-	
-	$router->get('/dash', function() use ($app) {
-		$app->render('dashboard');
-	});
 	
   $router->get('/donate', function() use ($app) {
 		$app->render('donate');
