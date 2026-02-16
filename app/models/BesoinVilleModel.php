@@ -4,6 +4,7 @@
 
     use Flight;
     use PDO;
+    use app\models\BesoinModel;
 
     class BesoinVilleModel{
 
@@ -52,6 +53,16 @@
             $stm->execute([$id]);
             return $stm->fetch()['reste'];
         }
+        public function insert() {
+            $idVille = Flight::request()->data->ville_id;
+            $idBesoin = Flight::request()->data->id_objet;
+            $BesoinModel = new BesoinModel($this->db);
+            $besoin = $BesoinModel->getByIdObjet($idBesoin);
+            $quantite = Flight::request()->data->quantite;
+            $stm = $this->db->prepare("INSERT INTO besoins_ville (id_ville, id_besoin, quantite) VALUES (?, ?, ?)");
+            $stm->execute([$idVille, $besoin['id'], $quantite]);
+        }
+        
     }
 
 ?>

@@ -6,6 +6,7 @@
     use app\models\BesoinVilleModel;
     use app\models\BesoinModel;
     use app\models\DonModel;
+    use app\models\VilleModel;
 
     class BesoinVilleController{
 
@@ -33,6 +34,20 @@
 
             Flight::render('dashboard', ['besoins' => $besoins, 'dons' => $dons, 'villes' => $villes]);
         }
+
+        public function InfoForBesoinDeclaration(){
+            $besoinModel = new BesoinModel(Flight::db());
+            $besoins = $besoinModel->getAllWithObject();
+            $VilleModel = new VilleModel(Flight::db());
+            $villes = $VilleModel->getAll();
+            Flight::render('declarebesoin', ['besoins' => $besoins, 'villes' => $villes]);
+        }
+        public function insert(){
+            $besoinVilleModel = new BesoinVilleModel(Flight::db());
+            $besoinVilleModel->insert();
+            $this->InfoForBesoinDeclaration();
+        }
+
 
     }
 
