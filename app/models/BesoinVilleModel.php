@@ -35,6 +35,12 @@
 
             return $ret->fetchAll();
         }
+
+        public function getByDateDesc() {
+            $stm = $this->db->prepare("SELECT * FROM dispatch ORDER BY daty DESC");
+            $stm->execute();
+            return $stm->fetchAll();
+        }
     }
 
 ?>
