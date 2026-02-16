@@ -49,4 +49,14 @@
             return $ret->fetch();
         }
 
-}
+    }
+
+        public function getAll() {
+            $dispatchModel = new DispatchModel($this->db);
+            $ret = Flight::db()->prepare("SELECT * FROM dons");
+            $ret->execute();
+            return $ret->fetchAll();
+        }
+    }
+
+?>

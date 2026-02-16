@@ -20,11 +20,11 @@ INSERT INTO ville (nom, id_region) VALUES
 ('Toamasina', 2),
 ('Fenerive Est', 2);
 
-INSERT INTO dons (id_objet, daty) VALUES 
-(1, '2026-02-16 08:00:00'), -- Un don de Riz
-(1, '2026-02-16 09:15:00'), -- Un autre don de Riz
-(2, '2026-02-16 10:00:00'), -- Un don d'Huile
-(5, '2026-02-16 11:00:00'); -- Un don de Médicaments (pas forcément un besoin listé)
+INSERT INTO dons (id_objet, daty, quantite) VALUES 
+(1, '2026-02-16 08:00:00', 50), -- Un don de Riz
+(1, '2026-02-16 09:15:00', 50), -- Un autre don de Riz
+(2, '2026-02-16 10:00:00', 25), -- Un don d'Huile
+(5, '2026-02-16 11:00:00', 10); -- Un don de Médicaments (pas forcément un besoin listé)
 
 INSERT INTO besoins_ville (id_ville, id_besoin, quantite) VALUES 
 (1, 1, 100), -- Antananarivo a besoin de 100 sacs de Riz
