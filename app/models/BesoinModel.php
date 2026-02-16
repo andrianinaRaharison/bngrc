@@ -28,7 +28,7 @@
         }
 
         public function getObject($id){
-            $ret = $this->db->prepare("SELECT b.*, o.libelle FROM besoins b JOIN objets o ON b.id_objet = o.id WHERE b.id = ?");
+            $ret = $this->db->prepare("SELECT b.*, o.libelle, bv.quantite FROM besoins b JOIN objets o ON b.id_objet = o.id JOIN besoins_ville bv ON bv.id_besoin = b.id WHERE b.id = ?");
             $ret->execute([$id]);
 
             return $ret->fetch();

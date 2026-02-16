@@ -49,18 +49,12 @@
                                 <!-- Besoins -->
                                 <h6 class="text-danger">Besoins</h6>
                                 <ul class="list-group mb-3">
-                                    <?php if(!empty($besoins)){?>
-                                        <?php foreach ($besoins as $b) { ?>
-    --                                     <li class="list-group-item d-flex justify-content-between">
-    --                                         <?= $b['libelle'];?>
-    --                                         <span class="badge bg-danger"><?= $b['quantite'];?></span>
-    --                                     </li>
---                                      <?php } ?>
-                                    <?php } else {?>
-                                        <li class="list-group-item d-flex justify-content-between">
-    --                                      Aucun besoin trouve!
-    --                                  </li>
-                                    <?php }?>
+                                    <?php foreach ($besoins[$v['id_ville']] as $b) { ?>
+--                                     <li class="list-group-item d-flex justify-content-between">
+--                                         <?= $b['libelle'];?>
+--                                         <span class="badge bg-danger"><?= $b['quantite'];?></span>
+--                                     </li>
+--                                  <?php } ?>
                                     <!-- <li class="list-group-item d-flex justify-content-between">
                                         Médicaments
                                         <span class="badge bg-danger">200</span>
@@ -76,17 +70,12 @@
                                 
                                 <ul class="list-group">
                                     
-                                    <?php if(!empty($dons)) {?>
-                                        <?php foreach ($dons as $d){?>
-    --                                      <li class="list-group-item d-flex justify-content-between">
-    --                                         <?= $d['libelle'];?>
-    --                                         <span class="badge bg-success">320</span>
-    --                                     </li>
---                                      <?php }?>
-                                    <?php } else {?>
-                                     <li class="list-group-item d-flex justify-content-between">
---                                         Aucun don trouve
---                                    <?php }?>
+                                    <?php foreach ($dons[$v['id_ville']] as $d){?>
+--                                      <li class="list-group-item d-flex justify-content-between">
+--                                         <?= $d['libelle'];?>
+--                                         <span class="badge bg-success"><?php echo $d['quantite']; ?></span>
+--                                     </li>
+--                                  <?php } ?>
                                     <!-- <li class="list-group-item d-flex justify-content-between">
                                         Médicaments
                                         <span class="badge bg-success">150</span>
