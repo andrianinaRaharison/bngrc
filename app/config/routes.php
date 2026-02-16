@@ -14,7 +14,11 @@ use flight\net\Router;
 $router->group('', function(Router $router) use ($app) {
 
 	$router->get('/', function() use ($app) {
-		$app->render('welcome', [ 'message' => 'You are gonna do great things!' ]);
+		$app->render('dashboard');
+	});
+
+	$router->get('/dash', function() use ($app) {
+		$app->render('dashboard');
 	});
 
 	$router->get('/hello-world/@name', function($name) {
