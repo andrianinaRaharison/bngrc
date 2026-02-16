@@ -70,14 +70,21 @@
                                     </div>
 
                                     <!-- Description -->
-                                    <div class="form-group mb-3">
-                                        <label for="description" class="form-label">Description (optionnelle)</label>
-                                        <textarea class="form-control"
-                                                  id="description"
-                                                  name="description"
-                                                  rows="3"
-                                                  placeholder="Détails supplémentaires..."></textarea>
-                                    </div>
+                              <div class="form-group mb-3">
+                                    <label for="unite" class="form-label">Unité du don</label>
+                                    <select class="form-select"
+                                            id="unite"
+                                            name="unite"
+                                            required>
+                                        <option value="">-- Sélectionner une unité --</option>
+                                        <option value="kg">Kilogrammes (kg)</option>
+                                        <option value="boites">Boîtes</option>
+                                        <option value="litres">Litres</option>
+                                        <option value="sacs">Sacs</option>
+                                        <option value="cartons">Cartons</option>
+                                        <option value="pieces">Pièces</option>
+                                    </select>
+                                </div>
 
                                     <!-- Bouton -->
                                     <div class="d-grid">
