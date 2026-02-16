@@ -22,7 +22,7 @@
                         </a>
                     </li>
                      <li class="sidebar-item">
-                        <a href="/declarebesoin" class="sidebar-link">
+                        <a href="/declare-besoin" class="sidebar-link">
                             <i class="bi bi-box-seam-fill"></i>
                             <span>Déclaration de besoins</span>
                         </a>
