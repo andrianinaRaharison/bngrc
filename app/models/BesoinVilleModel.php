@@ -28,10 +28,10 @@
             return $ret->fetchAll();
         }
 
-        public function donsVille(){
-            $ret =  $this->db->prepare("SELECT * FROM dispatch ");
+        public function donsVille($id){
+            $ret =  $this->db->prepare("SELECT * FROM dispatch WHERE id_ville = ?");
 
-            $ret->execute();
+            $ret->execute([$id]);
 
             return $ret->fetchAll();
         }

@@ -16,21 +16,25 @@
             $besModel = new BesoinModel(Flight::db());
             $donModel = new DonModel(Flight::db());
 
-            $Besoins = $besoinModel->getByIdVille($id);
+            $villes = $besoinModel->getVilles();
+            $dons = array();
+            foreach($villes as $v) {
+                 $Besoins[$v['id_ville']] = $besoinModel->getByIdVille($v['id_ville']);
+                 $Dons = $besoinModel->donsVille($v['id_ville']);
+     
+                 foreach($Dons as $d){
+                     $dons[$v['id_ville']][] = $donModel->getObject($d['id_dons']);
+                 }
+            }
             $besoins = array();
 
-            foreach($Besoins as $b){
-                $besoins[] = $besModel->getObject($b['id']);
+            foreach($Besoins as $key => $b){
+                foreach($b as $b1) {
+                    $besoins[$key][] = $besModel->getObject($b1['id_besoin']);
+                }
             }
 
-            $Dons = $besoinModel->donsVille();
-            $dons = array();
 
-            foreach($Dons as $d){
-                $dons[] = $donModel->getObject($d['id']);
-            }
-
-            $villes = $besoinModel->getVilles();
 
             Flight::render('dashboard', ['besoins' => $besoins, 'dons' => $dons, 'villes' => $villes]);
         }
