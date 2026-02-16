@@ -5,6 +5,8 @@
     use Flight;
     use app\models\DonModel;
     use app\models\UniteModel;
+    use app\models\BesoinVilleModel;
+    use app\models\DispatchModel;
     class DonController{
 
       public function insert(){
@@ -22,14 +24,14 @@
             $bvm = new BesoinVilleModel($db);
             $dm = new DispatchModel($db);
             $lastDispatch = $dm->getLastDispatch();
+            $dispo = $lastDispatch == null ? $don->getAll() : $don->getDonsDispo($lastDispatch['daty']);
             $ordered = $bvm->getByDateDesc();
-            $dispo = $don->getDonsDispo($lastDispatch);
             $count = 0;
             try {
                 $db->beginTransaction();
                 foreach($dispo as $d) :
                     if($count == count($ordered)) :
-                        $count == 0;
+                        $count = 0;
                     endif;
                     $data = [
                         $ordered[$count]['id_ville'],
@@ -39,9 +41,11 @@
                     $count++;
                 endforeach;
                 $db->commit();
+                Flight::render('test-dispatch');
             } catch(Exception $e) {
                 $db->rollback();
                 $error = "Error while dispatching...";
+                Flight::render('test-dispatch', ['error' => $error]);
             }
         }  
     }

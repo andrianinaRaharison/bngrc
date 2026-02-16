@@ -56,6 +56,7 @@ CREATE TABLE besoins_ville (
     id_ville INT,
     id_besoin INT,
     quantite FLOAT,
+    daty TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_ville) REFERENCES ville(id),
     FOREIGN KEY (id_besoin) REFERENCES besoins(id)
 );

@@ -37,7 +37,7 @@
         }
 
         public function getByDateDesc() {
-            $stm = $this->db->prepare("SELECT * FROM dispatch ORDER BY daty DESC");
+            $stm = $this->db->prepare("SELECT * FROM besoins_ville ORDER BY daty DESC");
             $stm->execute();
             return $stm->fetchAll();
         }

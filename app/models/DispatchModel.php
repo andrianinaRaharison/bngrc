@@ -13,6 +13,10 @@
             $this->db = Flight::db();
         }
 
+        public function getAll() {
+            
+        }
+
         public function insert($data) {
             $stm = $this->db->prepare("INSERT INTO dispatch (id_ville, id_dons) VALUES (?, ?)");
             $stm->execute($data);
