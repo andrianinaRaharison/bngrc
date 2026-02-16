@@ -1,5 +1,7 @@
 CREATE OR REPLACE VIEW v_besoin_ville_region AS
-SELECT bv.id_besoin,
+SELECT 
+    bv.id,
+    bv.id_besoin,
     bv.quantite,
     v.id as id_ville,
     v.nom as ville_nom, 

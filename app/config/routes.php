@@ -7,6 +7,7 @@ use flight\Engine;
 use flight\net\Router;
 use app\controllers\DonController;
 use app\controllers\UniteController;
+use app\controllers\VilleController;
 
 /** 
  * @var Router $router 
@@ -19,6 +20,8 @@ $router->group('', function(Router $router) use ($app) {
 	$router->get('/', function() use ($app) {
 		$app->render('dashboard');
 	});
+
+	$router->get('/villes', [VilleController::class, 'renderAll']);
   
 	$router->get('/acheter-besoin', function() use ($app) {
 		$app->render('achatbesoin');
@@ -28,6 +31,7 @@ $router->group('', function(Router $router) use ($app) {
 		$app->render('declarebesoin');
 	});
 	
+	$router->get("/ville-besoin/@id", [VilleController::class, 'renderBesoinByVille']);
 
   $router->get('/donate',[ UniteController::class, 'getAll' ]);
 
