@@ -24,7 +24,12 @@
             $idObjet = $objetModel->getIdByLibelle($libelle);
             $ret = Flight::db()->prepare("INSERT INTO dons (id_objet, quantite) VALUES (?, ?)");
             $ret->execute([$idObjet, $quantite]);
+        }   
+        public function getDonsDispo($date){
+            $dispatchModel = new DispatchModel($this->db);
+            $ret = Flight::db()->prepare("SELECT * FROM dons WHERE daty > ? ");
+            $ret->execute([$date]);
+          return $ret->fetchAll();
+   
         }
-      
-    }
 
