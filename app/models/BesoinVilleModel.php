@@ -29,7 +29,7 @@
 
         public function donsVille($daty){
             $ret =  $this->db->prepare("SELECT * FROM dispatch WHERE 1 = 1 +
-                    AND YEAR(daty) >= ? AND MONTH(daty) >= ? OR daty >= ?");
+                    AND YEAR(daty) = ? AND MONTH(daty) = ? ");
 
             $ret->execute($daty);
 
