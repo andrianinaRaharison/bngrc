@@ -41,10 +41,16 @@
             $ret->execute();
             return $ret->fetchAll();
         }
- public function getByDateDesc() {
+         public function getByDateDesc() {
             $stm = $this->db->prepare("SELECT bv.*, o.id as id_objet FROM besoins_ville bv JOIN besoins b ON bv.id_besoin = b.id JOIN objets o ON o.id = b.id_objet ORDER BY daty DESC");
             $stm->execute();
             return $stm->fetchAll();
+        }
+
+        public function getResteBesoins($id) {
+            $stm = $this->db->prepare("SELECT get_besoin_reste(?) as reste");
+            $stm->execute([$id]);
+            return $stm->fetch()['reste'];
         }
     }
 

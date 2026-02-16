@@ -18,7 +18,7 @@
         }
 
         public function insert($data) {
-            $stm = $this->db->prepare("INSERT INTO dispatch (id_ville, id_dons) VALUES (?, ?)");
+            $stm = $this->db->prepare("INSERT INTO dispatch (id_ville, id_dons, quantite) VALUES (?, ?, ?)");
             $stm->execute($data);
         }
 

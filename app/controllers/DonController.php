@@ -30,27 +30,34 @@
             try {
                 $db->beginTransaction();
                 foreach($ordered as $d) :
-                    $dispo = $don->getMatchingDons($d['id_objet']);
-                    if($dispo == null) :
-                        $dispo = $don->getDonsDispo();
-                    endif;
-                    $data = [
-                        $d['id_ville'],
-                        $dispo[0]['id']
-                    ];
-                    $dm->insert($data);
-                    $remaining = $don->getDonsDispo();
-                endforeach;
-                foreach($remaining as $r) {
-                    if($count == count($remaining)) :
-                        $count = 0;
-                    endif;
-                    $data = [
-                        $ordered[$count]['id_ville'],
-                        $r['id'],
-                    ];
-                    $dm->insert($data);
+                    while($bvm->getResteBesoins($d['id']) > 0 && count($don->getMatchingDons($d['id_objet'])) > 0) {
+                        $dispo = $don->getMatchingDons($d['id_objet']);
+                        if($dispo == null) :
+                            $dispo = $don->getDonsDispo();
+                        endif;
+                        $data = [
+                            $d['id_ville'],
+                            $dispo[0]['id'],
+                            min($dispo[0]['reste'], $bvm->getResteBesoins($d['id']))
+                        ];
+                        $dm->insert($data);
+                        $remaining = $don->getDonsDispo();
+                    }
                     $count++;
+                endforeach;
+                if($remaining != null) {
+                    foreach($remaining as $r) {
+                        if($count >= count($ordered)) :
+                            $count = 0;
+                        endif;
+                        $data = [
+                            $ordered[$count]['id_ville'],
+                            $r['id'],
+                            $r['reste']
+                        ];
+                        $dm->insert($data);
+                        $count++;
+                    }
                 }
                 $db->commit();
                 Flight::render('test-dispatch');
