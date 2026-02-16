@@ -3,11 +3,18 @@
     namespace app\controllers;
 
     use Flight;
-    use app\DonModel;
-    use app\BesoinVilleModel;
-    use app\DispatchModel;
+    use app\models\DonModel;
+    use app\models\UniteModel;
+    class DonController{
 
-    class DonController {
+      public function insert(){
+        $donModel = new DonModel(Flight::db());
+        $donModel->insert();
+        $uniteModel = new UniteModel(Flight::db());
+        $unites = $uniteModel->getAll();    
+            Flight::render('donate', ['unites' => $unites] );
+      }
+
 
         public function dispatch() {
             $db = Flight::db();
@@ -35,8 +42,7 @@
                 $db->rollback();
                 $error = "Error while dispatching...";
             }
-        }    
-
+        }  
     }
 
 ?>

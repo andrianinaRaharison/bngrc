@@ -18,6 +18,7 @@
 
     <!-- SIDEBAR -->
     <?php include('fragments/sidebar.php'); ?>
+
     <!-- MAIN -->
     <div id="main">
         <header class="mb-3">
@@ -44,7 +45,7 @@
 
                             <div class="card-body">
 
-                                <form action="traitement-don.php" method="POST">
+                                <form action="/donate" method="POST">
 
                                     <!-- Libellé -->
                                     <div class="form-group mb-3">
@@ -69,22 +70,16 @@
                                                required>
                                     </div>
 
-                                    <!-- Description -->
-                              <div class="form-group mb-3">
-                                    <label for="unite" class="form-label">Unité du don</label>
-                                    <select class="form-select"
-                                            id="unite"
-                                            name="unite"
-                                            required>
-                                        <option value="">-- Sélectionner une unité --</option>
-                                        <option value="kg">Kilogrammes (kg)</option>
-                                        <option value="boites">Boîtes</option>
-                                        <option value="litres">Litres</option>
-                                        <option value="sacs">Sacs</option>
-                                        <option value="cartons">Cartons</option>
-                                        <option value="pieces">Pièces</option>
-                                    </select>
-                                </div>
+                                    <!-- Unité -->
+                                    <div class="form-group mb-3">
+                                        <label for="id_unite" class="form-label">Unité du don</label>
+                                        <select class="form-select" id="id_unite" name="id_unite" required>
+                                            <option value="">-- Sélectionner une unité --</option>
+                                            <?php foreach ($unites as $unite){?>
+                                                <option value="<?= $unite['id'] ?>"><?= htmlspecialchars($unite['ref']) ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
 
                                     <!-- Bouton -->
                                     <div class="d-grid">
@@ -102,9 +97,9 @@
                 </div>
             </section>
         </div>
+
         <?php include('fragments/footer.php'); ?>
 
-      
     </div>
 </div>
 
