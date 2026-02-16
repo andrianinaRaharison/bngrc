@@ -25,18 +25,23 @@
             $ret = Flight::db()->prepare("INSERT INTO dons (id_objet, quantite) VALUES (?, ?)");
             $ret->execute([$idObjet, $quantite]);
         }   
-        public function getDonsDispo($date){
+        public function getDonsDispo(){
             $dispatchModel = new DispatchModel($this->db);
-            $ret = Flight::db()->prepare("SELECT * FROM dons WHERE daty > ? ");
-            $ret->execute([$date]);
-          return $ret->fetchAll();
+            $ret = Flight::db()->prepare("SELECT dons.*, dispatch.id_dons FROM dons LEFT JOIN dispatch ON dons.id = dispatch.id_dons WHERE dispatch.id_dons IS NULL");
+            $ret->execute();
+            return $ret->fetchAll();
    
         }
 
         public function getAll() {
-            $dispatchModel = new DispatchModel($this->db);
             $ret = Flight::db()->prepare("SELECT * FROM dons");
             $ret->execute();
+            return $ret->fetchAll();
+        }
+
+        public function getMatchingDons($idObjet) {
+            $ret = Flight::db()->prepare("SELECT dons.*, dispatch.id_dons FROM dons LEFT JOIN dispatch ON dons.id = dispatch.id_dons WHERE dispatch.id_dons IS NULL AND dons.id_objet = ?");
+            $ret->execute([$idObjet]);
             return $ret->fetchAll();
         }
 

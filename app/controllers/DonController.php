@@ -24,22 +24,34 @@
             $bvm = new BesoinVilleModel($db);
             $dm = new DispatchModel($db);
             $lastDispatch = $dm->getLastDispatch();
-            $dispo = $lastDispatch == null ? $don->getAll() : $don->getDonsDispo($lastDispatch['daty']);
             $ordered = $bvm->getByDateDesc();
             $count = 0;
+            $remaining = null;
             try {
                 $db->beginTransaction();
-                foreach($dispo as $d) :
-                    if($count == count($ordered)) :
+                foreach($ordered as $d) :
+                    $dispo = $don->getMatchingDons($d['id_objet']);
+                    if($dispo == null) :
+                        $dispo = $don->getDonsDispo();
+                    endif;
+                    $data = [
+                        $d['id_ville'],
+                        $dispo[0]['id']
+                    ];
+                    $dm->insert($data);
+                    $remaining = $don->getDonsDispo();
+                endforeach;
+                foreach($remaining as $r) {
+                    if($count == count($remaining)) :
                         $count = 0;
                     endif;
                     $data = [
                         $ordered[$count]['id_ville'],
-                        $d['id']
+                        $r['id'],
                     ];
                     $dm->insert($data);
                     $count++;
-                endforeach;
+                }
                 $db->commit();
                 Flight::render('test-dispatch');
             } catch(Exception $e) {
