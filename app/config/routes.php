@@ -20,13 +20,15 @@ $router->group('', function(Router $router) use ($app) {
 		$app->render('dashboard');
 	});
   
+	$router->get('/acheter-besoin', function() use ($app) {
+		$app->render('achatbesoin');
+	});
+  
   $router->get('/declarebesoin', function() use ($app) {
 		$app->render('declarebesoin');
 	});
 	
-  $router->get('/donate', function() use ($app) {
-		$app->render('donate');
-	});
+
   $router->get('/donate',[ UniteController::class, 'getAll' ]);
 
 	$router->get('/dash', [BesoinVilleController::class, 'getVilleBesoin']);
