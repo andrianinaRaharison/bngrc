@@ -4,6 +4,8 @@ use app\controllers\ApiExampleController;
 use app\middlewares\SecurityHeadersMiddleware;
 use flight\Engine;
 use flight\net\Router;
+use app\controllers\DonController;
+use app\controllers\UniteController;
 
 /** 
  * @var Router $router 
@@ -20,13 +22,13 @@ $router->group('', function(Router $router) use ($app) {
 	$router->get('/dash', function() use ($app) {
 		$app->render('dashboard');
 	});
-	$router->get('/donate', function() use ($app) {
-		$app->render('donate');
-	});
+	$router->get('/donate',[ UniteController::class, 'getAll' ]);
 
 	$router->get('/hello-world/@name', function($name) {
 		echo '<h1>Hello world! Oh hey '.$name.'!</h1>';
 	});
+
+	$router->post('/donate', [ DonController::class, 'insert' ]);
 
 	$router->group('/api', function() use ($router) {
 		$router->get('/users', [ ApiExampleController::class, 'getUsers' ]);
