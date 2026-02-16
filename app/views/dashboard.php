@@ -16,29 +16,7 @@
 
 <div id="app">
     <!-- SIDEBAR -->
-    <div id="sidebar">
-        <div class="sidebar-wrapper active">
-            <div class="sidebar-header">
-                <div class="logo">
-                    <h5 class="mt-2">Gestion Dons</h5>
-                </div>
-            </div>
-
-            <div class="sidebar-menu">
-                <ul class="menu">
-                    <li class="sidebar-title">Menu</li>
-
-                    <li class="sidebar-item active">
-                        <a href="#" class="sidebar-link">
-                            <i class="bi bi-grid-fill"></i>
-                            <span>Tableau de Bord</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
+    <?php include('fragments/sidebar.php'); ?>
     <!-- MAIN -->
     <div id="main">
         <header class="mb-3">
@@ -142,21 +120,12 @@
             </section>
         </div>
 
-        <footer>
-            <div class="footer clearfix mb-0 text-muted">
-                <div class="float-start">
-                    <p>2026 &copy; Mazer</p>
-                </div>
-                <div class="float-end">
-                    <p>Projet Gestion des Dons</p>
-                </div>
-            </div>
-        </footer>
+        <?php include('fragments/footer.php'); ?>
+        
     </div>
 </div>
 
 <script src="/assets/static/js/components/dark.js"></script>
 <script src="/assets/compiled/js/app.js"></script>
-
 </body>
 </html>
