@@ -27,7 +27,7 @@ $router->group('', function(Router $router) use ($app) {
 		$app->render('achatbesoin');
 	});
   
-  $router->get('/declarebesoin', function() use ($app) {
+  $router->get('/declare-besoin', function() use ($app) {
 		$app->render('declarebesoin');
 	});
 	
