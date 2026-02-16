@@ -36,6 +36,12 @@ $router->group('', function(Router $router) use ($app) {
 
   $router->get('/declare-besoin', [BesoinVilleController::class, 'InfoForBesoinDeclaration']);
    $router->get('/api/unite/@id_objet', [BesoinController::class, 'getUniteForObject']);
+  $router->get('/declarebesoin', function() use ($app) {
+		$app->render('declarebesoin');
+	});
+	
+	$router->get("/ville-besoin/@id", [VilleController::class, 'renderBesoinByVille']);
+
   $router->get('/donate',[ UniteController::class, 'getAll' ]);
 
 	$router->get('/dash', [BesoinVilleController::class, 'getVilleBesoin']);
