@@ -51,7 +51,7 @@
                                 <ul class="list-group mb-3">
                                     <?php foreach ($besoins as $b) { ?>
 --                                     <li class="list-group-item d-flex justify-content-between">
---                                         <?= $b['ville_nom'];?>
+--                                         <?= $b['libelle'];?>
 --                                         <span class="badge bg-danger"><?= $b['quantite'];?></span>
 --                                     </li>
 --                                  <?php } ?>

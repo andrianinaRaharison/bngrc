@@ -19,17 +19,9 @@ $router->group('', function(Router $router) use ($app) {
 	$router->get('/', function() use ($app) {
 		$app->render('dashboard');
 	});
-
-		$router->get('/declarebesoin', function() use ($app) {
+  
+  $router->get('/declarebesoin', function() use ($app) {
 		$app->render('declarebesoin');
-	});
-
-	// $router->get('/dash', function() use ($app) {
-	// 	$app->render('dashboard');
-	// });
-	
-	$router->get('/dash', function() use ($app) {
-		$app->render('dashboard');
 	});
 	
   $router->get('/donate', function() use ($app) {

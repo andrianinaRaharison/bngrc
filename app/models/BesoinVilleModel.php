@@ -41,6 +41,7 @@
             $ret->execute();
             return $ret->fetchAll();
         }
+
         public function getByDateDesc() {
             $stm = $this->db->prepare("SELECT * FROM besoins_ville ORDER BY daty DESC");
             $stm->execute();
