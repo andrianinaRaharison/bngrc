@@ -29,7 +29,7 @@ CREATE TABLE ville (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(100),
     id_region INT,
-    FOREIGN KEY (id_region) REFERENCES regions(id)
+    FOREIGN KEY (id_region) REFERENCES region(id)
 );
 
 CREATE TABLE dispatch (
@@ -48,4 +48,4 @@ CREATE TABLE besoins_ville (
     quantite FLOAT,
     FOREIGN KEY (id_ville) REFERENCES ville(id),
     FOREIGN KEY (id_besoin) REFERENCES besoins(id)
-)
+);
