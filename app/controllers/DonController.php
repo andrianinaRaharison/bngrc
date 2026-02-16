@@ -21,8 +21,9 @@
             $don = new DonModel($db);
             $bvm = new BesoinVilleModel($db);
             $dm = new DispatchModel($db);
+            $lastDispatch = $dm->getLastDispatch();
             $ordered = $bvm->getByDateDesc();
-            $dispo = $don->getDonsDispo();
+            $dispo = $don->getDonsDispo($lastDispatch);
             $count = 0;
             try {
                 $db->beginTransaction();
