@@ -28,7 +28,7 @@
         }   
         public function getDonsDispo(){
             $dispatchModel = new DispatchModel($this->db);
-            $ret = Flight::db()->prepare("SELECT dons.*, dispatch.id_dons FROM dons LEFT JOIN dispatch ON dons.id = dispatch.id_dons WHERE dispatch.id_dons IS NULL");
+            $ret = Flight::db()->prepare("SELECT dons.*, dispatch.id_dons, get_don_reste(dons.id) as reste FROM dons LEFT JOIN dispatch ON dons.id = dispatch.id_dons WHERE get_don_reste(dons.id) > 0");
             $ret->execute();
             return $ret->fetchAll();
    
@@ -56,9 +56,9 @@
             }
             
             public function getMatchingDons($idObjet) {
-                $ret = Flight::db()->prepare("SELECT dons.*, dispatch.id_dons FROM dons LEFT JOIN dispatch ON dons.id = dispatch.id_dons WHERE dispatch.id_dons IS NULL AND dons.id_objet = ?");
+                $ret = Flight::db()->prepare("SELECT dons.*, get_don_reste(dons.id) as reste, ABS(get_don_reste(dons.id) - get_besoin_reste(bv.id)) AS diff FROM dons JOIN besoins b ON dons.id_objet = b.id_objet JOIN besoins_ville bv ON bv.id_besoin = b.id WHERE get_don_reste(dons.id) > 0 AND dons.id_objet = ? ORDER BY diff DESC LIMIT 1");
                 $ret->execute([$idObjet]);
                 return $ret->fetchAll();
-                }
+            }
                 
-        }
+    }
