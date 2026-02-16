@@ -49,7 +49,7 @@
                                 <!-- Besoins -->
                                 <h6 class="text-danger">Besoins</h6>
                                 <ul class="list-group mb-3">
-                                    <?php foreach ($besoins as $b) { ?>
+                                    <?php foreach ($besoins[$v['id_ville']] as $b) { ?>
 --                                     <li class="list-group-item d-flex justify-content-between">
 --                                         <?= $b['libelle'];?>
 --                                         <span class="badge bg-danger"><?= $b['quantite'];?></span>
@@ -70,12 +70,12 @@
                                 
                                 <ul class="list-group">
                                     
-                                    <?php foreach ($dons as $d){?>
+                                    <?php foreach ($dons[$v['id_ville']] as $d){?>
 --                                      <li class="list-group-item d-flex justify-content-between">
 --                                         <?= $d['libelle'];?>
---                                         <span class="badge bg-success">320</span>
+--                                         <span class="badge bg-success"><?php echo $d['quantite']; ?></span>
 --                                     </li>
---                                  <?php }?>
+--                                  <?php } ?>
                                     <!-- <li class="list-group-item d-flex justify-content-between">
                                         Médicaments
                                         <span class="badge bg-success">150</span>
