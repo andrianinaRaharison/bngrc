@@ -2,8 +2,12 @@
 
 use app\controllers\ApiExampleController;
 use app\middlewares\SecurityHeadersMiddleware;
+use app\controllers\BesoinVilleController;
+use app\controllers\BesoinController;
 use flight\Engine;
 use flight\net\Router;
+use app\controllers\DonController;
+use app\controllers\UniteController;
 
 /** 
  * @var Router $router 
@@ -14,17 +18,32 @@ use flight\net\Router;
 $router->group('', function(Router $router) use ($app) {
 
 	$router->get('/', function() use ($app) {
-		$app->render('welcome', [ 'message' => 'You are gonna do great things!' ]);
+		$app->render('dashboard');
 	});
+  
+	$router->get('/acheter-besoin', function() use ($app) {
+		$app->render('achatbesoin');
+	});
+  
+  $router->get('/declare-besoin', [BesoinVilleController::class, 'InfoForBesoinDeclaration']);
+   $router->get('/api/unite/@id_objet', [BesoinController::class, 'getUniteForObject']);
+  $router->get('/donate',[ UniteController::class, 'getAll' ]);
+
+	$router->get('/dash', [BesoinVilleController::class, 'getVilleBesoin']);
 
 	$router->get('/hello-world/@name', function($name) {
 		echo '<h1>Hello world! Oh hey '.$name.'!</h1>';
 	});
+
+	$router->post('/donate', [ DonController::class, 'insert' ]);
+	$router->post('/add-besoin', [ BesoinVilleController::class, 'insert' ]);
 
 	$router->group('/api', function() use ($router) {
 		$router->get('/users', [ ApiExampleController::class, 'getUsers' ]);
 		$router->get('/users/@id:[0-9]', [ ApiExampleController::class, 'getUser' ]);
 		$router->post('/users/@id:[0-9]', [ ApiExampleController::class, 'updateUser' ]);
 	});
+
+	$router->get('/dispatch', [DonController::class, 'dispatch']);
 	
 }, [ SecurityHeadersMiddleware::class ]);
