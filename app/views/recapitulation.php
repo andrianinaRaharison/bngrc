@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                         <h6 class="text-muted font-semibold">Besoins Totaux</h6>
-                                        <h6 class="font-extrabold mb-0"><span id="total-amount"><?= $total?></span> Ar</h6>
+                                        <h6 class="font-extrabold mb-0"><span id="total-amount"><?= $total?></span></h6>
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                         <h6 class="text-muted font-semibold">Montant Satisfait</h6>
-                                        <h6 class="font-extrabold mb-0 text-success"><span id="satisfied-amount"><?= $satisfait?></span> Ar</h6>
+                                        <h6 class="font-extrabold mb-0 text-success"><span id="satisfied-amount"><?= $satisfait?></span></h6>
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                                     </div>
                                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                         <h6 class="text-muted font-semibold">Montant Restant</h6>
-                                        <h6 class="font-extrabold mb-0 text-danger"><span id="remaining-amount"><?= $reste?></span> Ar</h6>
+                                        <h6 class="font-extrabold mb-0 text-danger"><span id="remaining-amount"><?= $reste?></span></h6>
                                     </div>
                                 </div>
                             </div>
