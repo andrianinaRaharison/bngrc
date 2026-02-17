@@ -25,7 +25,8 @@
             $ret = $this->db->prepare("SELECT v.*, get_besoin_reste(v.id) AS reste, o.libelle FROM v_besoin_ville_region v JOIN besoins b ON b.id = v.id_besoin JOIN objets o ON o.id = b.id_objet WHERE id_ville = ?");
             $ret->execute([$id]);
 
-            return $ret->fetchAll();
+            $data = $ret->fetchAll();
+            return $data;
         }
 
         public function donsVille($id){

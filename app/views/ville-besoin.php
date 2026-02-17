@@ -29,8 +29,8 @@
                 <div class="col-12">
                     <div class="card bg-primary text-white">
                         <div class="card-body px-4 py-4-5 text-center">
-                            <h6 class="text-white-50 font-semibold">Montant restant en caisse. Ville: <b><?php echo $ville['nom'] ?></b></h6>
-                            <h2 class="font-extrabold mb-0">1 500 000 Ar</h2>
+                            <h6 class="text-white-50 font-semibold">Montant restant sur les dons. Ville: <b><?php echo $ville['nom'] ?></b></h6>
+                            <h2 class="font-extrabold mb-0"><?php echo $ville['reste_don_arg']; ?> Ar</h2>
                         </div>
                     </div>
                 </div>
