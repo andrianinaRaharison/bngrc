@@ -33,6 +33,10 @@ $router->group('', function (Router $router) use ($app) {
 
     $router->get('/', [BesoinVilleController::class, 'getVilleBesoin']);
 
+    $router->get('/dispatches', function () use ($app) {
+        $app->render('dispatches');
+    });
+
     $router->get('/hello-world/@name', function ($name) {
         echo '<h1>Hello world! Oh hey ' . $name . '!</h1>';
     });

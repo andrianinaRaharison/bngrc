@@ -22,7 +22,7 @@
         }
 
         public function getByIdVille($id){
-            $ret = $this->db->prepare("SELECT v.*, get_besoin_reste(v.id) AS reste, o.libelle FROM v_besoin_ville_region v JOIN besoins b ON b.id = v.id_besoin JOIN objets o ON o.id = b.id_objet WHERE id_ville = ? AND b.type_besoin != 3");
+            $ret = $this->db->prepare("SELECT v.*, get_besoin_reste(v.id) AS reste, o.libelle FROM v_besoin_ville_region v JOIN besoins b ON b.id = v.id_besoin JOIN objets o ON o.id = b.id_objet WHERE id_ville = ? AND b.id_type != 3");
             $ret->execute([$id]);
 
             $data = $ret->fetchAll();
@@ -61,6 +61,13 @@
             $stm->execute([$id]);
             return $stm->fetch()['reste'];
         }
+
+        public function getByBesoin($id) {
+            $stm = $this->db->prepare("SELECT * FROM besoins_ville WHERE id_besoin = ? AND get_besoin_reste(id) > 0");
+            $stm->execute([$id]);
+            return $stm->fetchAll();
+        }
+        
         public function insert() {
             $idVille = Flight::request()->data->ville_id;
             $idBesoin = Flight::request()->data->id_objet;
@@ -70,6 +77,33 @@
             $stm = $this->db->prepare("INSERT INTO besoins_ville (id_ville, id_besoin, quantite) VALUES (?, ?, ?)");
             $stm->execute([$idVille, $besoin['id'], $quantite]);
         }
+
+        public function getInitBesoins() {
+            $bm = new BesoinModel(Flight::db());
+            $allB = $bm->getAll();
+            $data = [];
+            foreach($allB as $a) :
+                $data[] = $this->getByBesoin($a['id']);
+            endforeach;
+            return $data;
+        }
+        
+        public function getByQuantiteAsc(){
+            $ret = $this->db->prepare("SELECT * FROM besoins_ville ORDER BY quantite ASC");
+            $ret->execute([$id]);
+
+            return $ret->fetchAll();
+        }
+
+        public function countBesoin($id){
+            $ret = $this->db->prepare("SELECT SUM(quantite) as count FROM besoins_ville WHERE id_besoin = ?");
+            $ret->execute([$id]);
+
+            return $ret->fetch();
+        }
+
+        
+
         
     }
 
