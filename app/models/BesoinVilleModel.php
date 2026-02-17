@@ -70,6 +70,8 @@
             $stm = $this->db->prepare("INSERT INTO besoins_ville (id_ville, id_besoin, quantite) VALUES (?, ?, ?)");
             $stm->execute([$idVille, $besoin['id'], $quantite]);
         }
+
+        
         
     }
 
