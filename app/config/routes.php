@@ -25,6 +25,7 @@ $router->group('', function (Router $router) use ($app) {
 
     $router->get('/acheter-besoin', [AchatController::class, 'renderAll']);
     $router->get("/recap", [BesoinVilleController::class, 'recapitulatif']);
+    $router->get('/api/recap-data', [BesoinVilleController::class, 'getRecapitulatifData']);
     $router->get('/declare-besoin', [BesoinVilleController::class, 'InfoForBesoinDeclaration']);
     $router->get('/api/unite/@id_objet', [BesoinController::class, 'getUniteForObject']);
     $router->get("/ville-besoin/@id", [VilleController::class, 'renderBesoinByVille']);
@@ -51,6 +52,11 @@ $router->group('', function (Router $router) use ($app) {
     });
 
     $router->get('/dispatch', [DonController::class, 'dispatch']);
+    $router->get('/dispatch-asc', [DonController::class, 'dispatchByAsc']);
+    $router->get('/dispatch-proportionnel', [DonController::class, 'dispatchProportionnel']);
     $router->get('/simuler-dispatch', [DonController::class, 'simulerDispatch']);
+    $router->get('/simuler-dispatch-asc', [DonController::class, 'simulerDispatchByAsc']);
+    $router->get('/simuler-dispatch-proportionnel', [DonController::class, 'simulerDispatchProportionnel']);
+    $router->get('/dispatches', [DonController::class, 'renderPage']);
 
 }, [SecurityHeadersMiddleware::class]);

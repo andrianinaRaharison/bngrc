@@ -40,7 +40,7 @@
             return $ret->fetch();
         }
 
-        public function CalculBesoinTotal(){
+       public function CalculBesoinTotal(){
             $ret = $this->db->prepare("SELECT SUM(b.prix_unitaire*bv.quantite) as total FROM besoins b LEFT JOIN besoins_ville bv ON b.id = bv.id_besoin");
             $ret->execute();
 
