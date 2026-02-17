@@ -71,6 +71,23 @@
             $stm->execute([$idVille, $besoin['id'], $quantite]);
         }
         
+        public function getByQuantiteAsc(){
+            $ret = $this->db->prepare("SELECT * FROM besoins_ville ORDER BY quantite ASC");
+            $ret->execute([$id]);
+
+            return $ret->fetchAll();
+        }
+
+        public function countBesoin($id){
+            $ret = $this->db->prepare("SELECT SUM(quantite) as count FROM besoins_ville WHERE id_besoin = ?");
+            $ret->execute([$id]);
+
+            return $ret->fetch();
+        }
+
+        
+
+        
     }
 
 ?>

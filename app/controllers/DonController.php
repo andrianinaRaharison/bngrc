@@ -71,7 +71,7 @@
                 Flight::render('simulationdispatch', ['error' => $error]);
             }
         }  
-    public function simulerDispatch() {
+        public function simulerDispatch() {
          $db = Flight::db();
             $don = new DonModel($db);
             $bvm = new BesoinVilleModel($db);
@@ -127,6 +127,59 @@
                 $error = "Error while dispatching...";
                 Flight::render('simulationdispatch', ['error' => $error]);
             }
-    }
+        }
+
+        public function dispatchByAsc(){
+            $db = Flight::db();
+            $don = new DonModel($db);
+            $bvm = new BesoinVilleModel($db);
+            $dm = new DispatchModel($db);
+            $ordered = $bvm->getByQuantiteAsc();
+            $count = 0;
+            $remaining = $don->getDonsDispo();
+            try {
+                $db->beginTransaction();
+                foreach($ordered as $d) :
+                    while($bvm->getResteBesoins($d['id']) > 0 && count($don->getMatchingDons($d['id_objet'])) > 0) {
+                        $dispo = $don->getMatchingDons($d['id_objet']);
+                        if($dispo == null || count($dispo) === 0) :
+                            $dispo = $don->getDonsDispo();
+                        endif;
+                        if($dispo == null || count($dispo) === 0) :
+                            break;
+                        endif;
+                        $data = [
+                            $d['id_ville'],
+                            $dispo[0]['id'],
+                            min($dispo[0]['reste'], $bvm->getResteBesoins($d['id']))
+                        ];
+                        $dm->insert($data);
+                        $remaining = $don->getDonsDispo();
+                    }
+                    $count++;
+                endforeach;
+                if($remaining != null && count($remaining) > 0) {
+                    foreach($remaining as $r) {
+                        if($count >= count($ordered)) :
+                            $count = 0;
+                        endif;
+                        $data = [
+                            $ordered[$count]['id_ville'],
+                            $r['id'],
+                            $r['reste']
+                        ];
+                        $dm->insert($data);
+                        $count++;
+                    }
+                }
+                $db->commit();
+                $dispatches = $dm->getAll();
+                Flight::render('simulationdispatch', ['dispatches' => $dispatches, 'success' => true]);
+            } catch(Exception $e) {
+                $db->rollback();
+                $error = "Error while dispatching...";
+                Flight::render('simulationdispatch', ['error' => $error]);
+            }
+        }
     }
 ?>
