@@ -26,11 +26,13 @@ $router->group('', function(Router $router) use ($app) {
 	$router->get('/acheter-besoin', function() use ($app) {
 		$app->render('achatbesoin');
 	});
-  
+	$router->get('/simuler', function() use ($app) {
+		$app->render('simulationdispatch');
+	});
   $router->get('/declarebesoin', function() use ($app) {
 		$app->render('declarebesoin');
 	});
-	
+
 	$router->get("/ville-besoin/@id", [VilleController::class, 'renderBesoinByVille']);
 
   $router->get('/donate',[ UniteController::class, 'getAll' ]);
@@ -50,5 +52,6 @@ $router->group('', function(Router $router) use ($app) {
 	});
 
 	$router->get('/dispatch', [DonController::class, 'dispatch']);
+	$router->get('/simuler-dispatch', [DonController::class, 'simulerDispatch']);
 	
 }, [ SecurityHeadersMiddleware::class ]);
