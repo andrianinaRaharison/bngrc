@@ -9,7 +9,7 @@
                     <li class="sidebar-title">Menu</li>
 
                     <li class="sidebar-item">
-                        <a href="/dash" class="sidebar-link">
+                        <a href="/" class="sidebar-link">
                             <i class="bi bi-grid-fill"></i>
                             <span>Tableau de Bord</span>
                         </a>
@@ -30,7 +30,26 @@
                        <li class="sidebar-item">
                         <a href="/acheter-besoin" class="sidebar-link">
                             <i class="bi bi-cart-fill"></i>
-                            <span>Achat des besoins</span>
+                            <span>Liste des achats</span>
+                        </a>
+                    </li>
+                    </li>
+                       <li class="sidebar-item">
+                        <a href="/villes" class="sidebar-link">
+                            <i class="bi bi-cart-fill"></i>
+                            <span>Acheter des besoins</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/recap" class="sidebar-link">
+                            <i class="bi bi-cart-fill"></i>
+                            <span>Recapitulatif financiere</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="/simuler-dispatch" class="sidebar-link">
+                            <i class="bi bi-cart-fill"></i>
+                            <span>Simuler dispatch</span>
                         </a>
                     </li>
                 </ul>

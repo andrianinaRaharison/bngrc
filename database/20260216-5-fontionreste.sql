@@ -1,8 +1,9 @@
 Alter TABLE dispatch ADD quantite FLOAT;
 
 DELIMITER //
-CREATE OR REPLACE FUNCTION get_don_reste(d_id INT)
+CREATE FUNCTION get_don_reste(d_id INT)
 RETURNS FLOAT
+DETERMINISTIC
 READS SQL DATA
 BEGIN
     DECLARE d_quant FLOAT;

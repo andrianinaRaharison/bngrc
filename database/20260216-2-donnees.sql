@@ -1,5 +1,7 @@
 INSERT INTO unite (ref) VALUES ('kg'), ('litre'), ('pièce'), ('sac');
 
+INSERT INTO type_besoin (nom_type) VALUES ('Nature'), ('Materiel'), ('Argent');
+
 INSERT INTO objets (libelle, id_unite) VALUES 
 ('Riz', 4),         -- id 1 (sac)
 ('Huile', 2),       -- id 2 (litre)
@@ -20,11 +22,11 @@ INSERT INTO ville (nom, id_region) VALUES
 ('Toamasina', 2),
 ('Fenerive Est', 2);
 
-INSERT INTO dons (id_objet, daty, quantite) VALUES 
-(1, '2026-02-16 08:00:00', 50), -- Un don de Riz
-(1, '2026-02-16 09:15:00', 50), -- Un autre don de Riz
-(2, '2026-02-16 10:00:00', 25), -- Un don d'Huile
-(5, '2026-02-16 11:00:00', 10); -- Un don de Médicaments (pas forcément un besoin listé)
+INSERT INTO dons (id_objet, daty, quantite, id_type) VALUES 
+(1, '2026-02-16 08:00:00', 50, 1), -- Un don de Riz
+(1, '2026-02-16 09:15:00', 50, 1), -- Un autre don de Riz
+(2, '2026-02-16 10:00:00', 25, 1), -- Un don d'Huile
+(5, '2026-02-16 11:00:00', 10, 2); -- Un don de Médicaments (pas forcément un besoin listé)
 
 INSERT INTO besoins_ville (id_ville, id_besoin, quantite) VALUES 
 (1, 1, 100), -- Antananarivo a besoin de 100 sacs de Riz

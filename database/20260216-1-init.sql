@@ -11,23 +11,25 @@ CREATE TABLE objets (
     id_unite INT,
     FOREIGN KEY (id_unite) REFERENCES unite(id)
 );
+CREATE TABLE type_besoin (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nom_type VARCHAR(50)
+);
 CREATE TABLE dons (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_objet INT,
     daty TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     quantite FLOAT,
+    type_besoin INT,
     FOREIGN KEY (id_objet) REFERENCES objets(id)
 );
 
-CREATE TABLE type_besoin (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nom_type VARCHAR(50)
-);
 
 CREATE TABLE besoins (
     id INT PRIMARY KEY AUTO_INCREMENT,
     prix_unitaire FLOAT,
     id_objet INT,
+    type_besoin INT,
     FOREIGN KEY (id_objet) REFERENCES objets(id)
 );
 

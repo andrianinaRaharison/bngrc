@@ -34,11 +34,43 @@
                 }
             }
 
-
-
             Flight::render('dashboard', ['besoins' => $besoins, 'dons' => $dons, 'villes' => $villes]);
         }
 
+        public function recapitulatif(){
+            $besModel = new BesoinModel(Flight::db());
+
+            $total = $besModel->CalculBesoinTotal();
+            $satisfait = $besModel->CalculBesoinSatisfait();
+            $reste = $total['total'] - $satisfait['satisfait'];
+
+            $tot = 0;
+            $sat = 0;
+            if($total['total'] != null){
+                $tot = $besModel->formatePrice($total['total']);
+            }
+            if($satisfait['satisfait'] != null){
+                $sat = $besModel->formatePrice($satisfait['satisfait']);
+            }
+            $res = $besModel->formatePrice($reste);
+
+            Flight::render('recapitulation', ['total' => $tot, 'satisfait' => $sat, 'reste' => $res]);
+        }
+
+        public function getRecapitulatifData(){
+            $besModel = new BesoinModel(Flight::db());
+
+            $total = $besModel->CalculBesoinTotal();
+            $satisfait = $besModel->CalculBesoinSatisfait();
+            $reste = $total['total'] - $satisfait['satisfait'];
+
+            Flight::json([
+                'success' => true,
+                'total' => $total['total'],
+                'satisfait' => $satisfait['satisfait'],
+                'reste' => $reste
+            ]);
+        }
         public function InfoForBesoinDeclaration(){
             $besoinModel = new BesoinModel(Flight::db());
             $besoins = $besoinModel->getAllWithObject();

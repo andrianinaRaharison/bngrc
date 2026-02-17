@@ -38,68 +38,21 @@
                 <div class="row">
 
                     <!-- FORMULAIRE -->
-                    <div class="col-12 col-lg-5">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4><i class="bi bi-plus-circle-fill text-primary"></i> Nouvel achat</h4>
-                            </div>
-                            <div class="card-body">
-
-                                <div class="mb-3">
-                                    <label class="form-label">Ville</label>
-                                    <select class="form-select">
-                                        <option>Antananarivo</option>
-                                        <option>Toamasina</option>
-                                        <option>Mahajanga</option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Besoin</label>
-                                    <select class="form-select">
-                                        <option>Riz</option>
-                                        <option>Kits médicaux</option>
-                                        <option>Bâches</option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Quantité</label>
-                                    <input type="number" id="quantite" class="form-control" min="1">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Prix unitaire (Ar)</label>
-                                    <input type="number" id="prix_unitaire" class="form-control">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Total (Ar)</label>
-                                    <input type="number" id="total" class="form-control" readonly>
-                                </div>
-
-                                <div class="d-grid">
-                                    <button class="btn btn-primary">
-                                        <i class="bi bi-check-circle-fill"></i>
-                                        Valider l'achat
-                                    </button>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
 
                     <!-- LISTE -->
-                    <div class="col-12 col-lg-7">
+                    <div class="col-10">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h4><i class="bi bi-list-ul"></i> Liste des achats</h4>
 
                                 <select class="form-select w-auto">
-                                    <option>Toutes les villes</option>
+                                    <!-- <option>Toutes les villes</option>
                                     <option>Antananarivo</option>
                                     <option>Toamasina</option>
-                                    <option>Mahajanga</option>
+                                    <option>Mahajanga</option> -->
+                                    <?php foreach($villes as $v) { ?>
+                                        <option value="<?php echo $v['id'] ?>"><?php echo $v['nom']; ?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
 
@@ -115,7 +68,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <!-- <tr>
                                             <td>Antananarivo</td>
                                             <td>Riz</td>
                                             <td>100</td>
@@ -128,7 +81,16 @@
                                             <td>50</td>
                                             <td>15 000 Ar</td>
                                             <td>750 000 Ar</td>
-                                        </tr>
+                                        </tr> -->
+                                        <?php foreach($achatVille as $av) { ?>
+                                            <tr>
+                                                <td><?php echo $av['nom']; ?></td>
+                                                <td><?php echo $av['libelle']; ?></td>
+                                                <td><?php echo $av['quantite']; ?></td>
+                                                <td><?php echo $av['prix_unitaire']; ?> Ar</td>
+                                                <td><?php echo $av['prix_ttc']; ?> Ar</td>
+                                            </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
