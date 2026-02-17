@@ -52,6 +52,8 @@
             JOIN besoins_ville bv ON d.id_ville = bv.id_ville
             JOIN besoins b ON bv.id_besoin = b.id");
             $ret->execute();
+            return $ret->fetch();
+        }
         public function getByIdObjet($id){
             $ret = $this->db->prepare("SELECT * FROM besoins WHERE id_objet = ?");
             $ret->execute([$id]);
