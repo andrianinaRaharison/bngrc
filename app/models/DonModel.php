@@ -78,6 +78,18 @@
                 return $ret->fetch();
             }
 
+            public function getStockByObjet($idObjet) {
+                $ret = $this->db->prepare("SELECT dons.id, dons.id_objet, vdr.reste FROM dons JOIN v_don_reste vdr ON dons.id = vdr.id WHERE vdr.reste > 0 AND dons.id_objet = ?");
+                $ret->execute([$idObjet]);
+                return $ret->fetchAll();
+            }
+
+            public function getStockByObjetTemp($idObjet) {
+                $ret = $this->db->prepare("SELECT dons.id, dons.id_objet, vdrt.reste FROM dons JOIN v_don_reste_temp vdrt ON dons.id = vdrt.id WHERE vdrt.reste > 0 AND dons.id_objet = ?");
+                $ret->execute([$idObjet]);
+                return $ret->fetchAll();
+            }
+
 
                 
     }

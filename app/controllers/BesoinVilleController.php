@@ -48,6 +48,21 @@
 
             Flight::render('recapitulation', ['total' => $total['total'], 'satisfait' => $satisfait['satisfait'], 'reste' => $reste]);
         }
+
+        public function getRecapitulatifData(){
+            $besModel = new BesoinModel(Flight::db());
+
+            $total = $besModel->CalculBesoinTotal();
+            $satisfait = $besModel->CalculBesoinSatisfait();
+            $reste = $total['total'] - $satisfait['satisfait'];
+
+            Flight::json([
+                'success' => true,
+                'total' => $total['total'],
+                'satisfait' => $satisfait['satisfait'],
+                'reste' => $reste
+            ]);
+        }
         public function InfoForBesoinDeclaration(){
             $besoinModel = new BesoinModel(Flight::db());
             $besoins = $besoinModel->getAllWithObject();

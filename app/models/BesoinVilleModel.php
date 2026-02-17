@@ -71,17 +71,46 @@
             $stm->execute([$idVille, $besoin['id'], $quantite]);
         }
         public function getByQuantiteAsc(){
-            $ret = $this->db->prepare("SELECT * FROM besoins_ville ORDER BY quantite ASC");
-            $ret->execute([$id]);
-
+            $ret = $this->db->prepare("SELECT bv.*, o.id as id_objet FROM besoins_ville bv JOIN besoins b ON bv.id_besoin = b.id JOIN objets o ON o.id = b.id_objet ORDER BY bv.quantite ASC");
+            $ret->execute();
             return $ret->fetchAll();
         }
 
         public function countBesoin($id){
             $ret = $this->db->prepare("SELECT SUM(quantite) as count FROM besoins_ville WHERE id_besoin = ?");
             $ret->execute([$id]);
-
             return $ret->fetch();
+        }
+
+        // Récupérer tous les besoins groupés par objet (pour dispatch proportionnel)
+        public function getBesoinsParObjet() {
+            $stm = $this->db->prepare("
+                SELECT bv.id, bv.id_ville, bv.id_besoin, bv.quantite, b.id_objet, o.libelle,
+                       vbr.reste
+                FROM besoins_ville bv
+                JOIN besoins b ON bv.id_besoin = b.id
+                JOIN objets o ON o.id = b.id_objet
+                JOIN v_besoin_reste vbr ON bv.id = vbr.id
+                WHERE vbr.reste > 0
+                ORDER BY b.id_objet, bv.id_ville
+            ");
+            $stm->execute();
+            return $stm->fetchAll();
+        }
+
+        public function getBesoinsParObjetTemp() {
+            $stm = $this->db->prepare("
+                SELECT bv.id, bv.id_ville, bv.id_besoin, bv.quantite, b.id_objet, o.libelle,
+                       vbrt.reste
+                FROM besoins_ville bv
+                JOIN besoins b ON bv.id_besoin = b.id
+                JOIN objets o ON o.id = b.id_objet
+                JOIN v_besoin_reste_temp vbrt ON bv.id = vbrt.id
+                WHERE vbrt.reste > 0
+                ORDER BY b.id_objet, bv.id_ville
+            ");
+            $stm->execute();
+            return $stm->fetchAll();
         }
         
     }
