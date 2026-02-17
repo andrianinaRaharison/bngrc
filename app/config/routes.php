@@ -19,9 +19,7 @@ use flight\net\Router;
 // This wraps all routes in the group with the SecurityHeadersMiddleware
 $router->group('', function (Router $router) use ($app) {
 
-    $router->get('/', function () use ($app) {
-        $app->render('dashboard');
-    });
+
 
     $router->get('/villes', [VilleController::class, 'renderAll']);
 
@@ -33,7 +31,7 @@ $router->group('', function (Router $router) use ($app) {
     $router->get('/donate', [UniteController::class, 'getAll']);
     $router->post('/acheter', [AchatController::class, 'acheter']);
 
-    $router->get('/dash', [BesoinVilleController::class, 'getVilleBesoin']);
+    $router->get('/', [BesoinVilleController::class, 'getVilleBesoin']);
 
     $router->get('/hello-world/@name', function ($name) {
         echo '<h1>Hello world! Oh hey ' . $name . '!</h1>';
