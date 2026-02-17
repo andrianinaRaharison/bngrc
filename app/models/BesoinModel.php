@@ -20,6 +20,12 @@
             return $ret->fetchAll();
         }
 
+        public function getAllWithObject(){
+            $ret = $this->db->prepare("SELECT * from v_besoin_objet");
+            $ret->execute();
+            return $ret->fetchAll();
+        }
+
         public function getById($id){
             $ret = $this->db->prepare("SELECT * FROM besoins WHERE id = ?");
             $ret->execute([$id]);
@@ -46,6 +52,9 @@
             JOIN besoins_ville bv ON d.id_ville = bv.id_ville
             JOIN besoins b ON bv.id_besoin = b.id");
             $ret->execute();
+        public function getByIdObjet($id){
+            $ret = $this->db->prepare("SELECT * FROM besoins WHERE id_objet = ?");
+            $ret->execute([$id]);
 
             return $ret->fetch();
         }

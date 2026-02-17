@@ -4,6 +4,7 @@
 
     use Flight;
     use PDO;
+    use app\models\BesoinModel;
 
     class BesoinVilleModel{
 
@@ -24,7 +25,8 @@
             $ret = $this->db->prepare("SELECT v.*, get_besoin_reste(v.id) AS reste, o.libelle FROM v_besoin_ville_region v JOIN besoins b ON b.id = v.id_besoin JOIN objets o ON o.id = b.id_objet WHERE id_ville = ?");
             $ret->execute([$id]);
 
-            return $ret->fetchAll();
+            $data = $ret->fetchAll();
+            return $data;
         }
 
         public function donsVille($id){
@@ -52,6 +54,16 @@
             $stm->execute([$id]);
             return $stm->fetch()['reste'];
         }
+        public function insert() {
+            $idVille = Flight::request()->data->ville_id;
+            $idBesoin = Flight::request()->data->id_objet;
+            $BesoinModel = new BesoinModel($this->db);
+            $besoin = $BesoinModel->getByIdObjet($idBesoin);
+            $quantite = Flight::request()->data->quantite;
+            $stm = $this->db->prepare("INSERT INTO besoins_ville (id_ville, id_besoin, quantite) VALUES (?, ?, ?)");
+            $stm->execute([$idVille, $besoin['id'], $quantite]);
+        }
+        
     }
 
 ?>
