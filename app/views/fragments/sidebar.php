@@ -33,6 +33,12 @@
                             <span>Achat des besoins</span>
                         </a>
                     </li>
+                    <li class="sidebar-item">
+                        <a href="/recap" class="sidebar-link">
+                            <i class="bi bi-cart-fill"></i>
+                            <span>Recapitulatif financiere</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

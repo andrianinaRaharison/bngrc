@@ -26,7 +26,7 @@
             $dm = new DispatchModel($db);
             $ordered = $bvm->getByDateDesc();
             $count = 0;
-            $remaining = null;
+            $remaining = $don->getDonsDispo();
             try {
                 $db->beginTransaction();
                 foreach($ordered as $d) :
