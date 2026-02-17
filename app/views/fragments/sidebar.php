@@ -30,7 +30,14 @@
                        <li class="sidebar-item">
                         <a href="/acheter-besoin" class="sidebar-link">
                             <i class="bi bi-cart-fill"></i>
-                            <span>Achat des besoins</span>
+                            <span>Liste des achats</span>
+                        </a>
+                    </li>
+                    </li>
+                       <li class="sidebar-item">
+                        <a href="/villes" class="sidebar-link">
+                            <i class="bi bi-cart-fill"></i>
+                            <span>Acheter des besoins</span>
                         </a>
                     </li>
                     <li class="sidebar-item">

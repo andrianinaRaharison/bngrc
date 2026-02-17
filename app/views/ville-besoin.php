@@ -36,6 +36,18 @@
                 </div>
             </div>
 
+            <?php if(isset($code)) { ?>
+                <?php if($code['ok']) { ?>
+                    <div class="bg-light-success text-center rounded text-success py-2 px-3">
+                        Completed successfully.
+                    </div>
+                <?php } else { ?>
+                    <div class="bg-light-danger text-center rounded text-danger py-2 px-3">
+                        <?= $code['error'] ?>
+                    </div>
+                <?php } ?>
+            <?php } ?>
+
             <div class="page-title mb-4">
                 <h3>Gestion des Besoins</h3>
                 <p class="text-subtitle text-muted">Achat et suivi des fournitures nécessaires.</p>
@@ -126,7 +138,10 @@
                                                 <span class="badge bg-light-danger"><?= $d['reste'] ?></span>
                                             </td>
                                             <td class="col-7">
-                                                <form action="/buy" method="POST" class="row g-2">
+                                                <form action="/acheter" method="POST" class="row g-2">
+                                                    <input type="hidden" name="id_ville" value="<?= $ville['id']; ?>">
+                                                    <input type="hidden" name="id_besoin" value="<?= $d['id_besoin']; ?>">
+                                                    <input type="hidden" name="id" value="<?= $d['id']; ?>">
                                                     <div class="col-8">
                                                         <input type="number" class="form-control" name="quantity" placeholder="Qté" required min="1" <?= $d['reste'] == 0 ? 'disabled' : '' ?>>
                                                     </div>
