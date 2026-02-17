@@ -18,6 +18,10 @@
             Flight::render('donate', ['unites' => $unites] );
       }
 
+      public function dispatchByAsc() {
+        
+      }
+
 
         public function dispatch() {
             $db = Flight::db();
