@@ -9,7 +9,7 @@
                     <li class="sidebar-title">Menu</li>
 
                     <li class="sidebar-item">
-                        <a href="/dash" class="sidebar-link">
+                        <a href="/" class="sidebar-link">
                             <i class="bi bi-grid-fill"></i>
                             <span>Tableau de Bord</span>
                         </a>

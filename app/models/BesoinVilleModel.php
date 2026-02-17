@@ -22,7 +22,7 @@
         }
 
         public function getByIdVille($id){
-            $ret = $this->db->prepare("SELECT v.*, get_besoin_reste(v.id) AS reste, o.libelle FROM v_besoin_ville_region v JOIN besoins b ON b.id = v.id_besoin JOIN objets o ON o.id = b.id_objet WHERE id_ville = ? AND b.type_besoin != 3");
+            $ret = $this->db->prepare("SELECT v.*, vbr.reste, o.libelle FROM v_besoin_ville_region v JOIN besoins b ON b.id = v.id_besoin JOIN objets o ON o.id = b.id_objet JOIN v_besoin_reste vbr ON v.id = vbr.id WHERE v.id_ville = ?");
             $ret->execute([$id]);
 
             $data = $ret->fetchAll();
@@ -50,14 +50,14 @@
         }
 
         public function getResteBesoins($id) {
-            $stm = $this->db->prepare("SELECT get_besoin_reste(?) as reste");
+            $stm = $this->db->prepare("SELECT reste FROM v_besoin_reste WHERE id = ?");
             $stm->execute([$id]);
             return $stm->fetch()['reste'];
         }
 
         // Méthode pour simulation avec dispatch_temp
         public function getResteBesoinsTemp($id) {
-            $stm = $this->db->prepare("SELECT get_besoin_reste_temp(?) as reste");
+            $stm = $this->db->prepare("SELECT reste FROM v_besoin_reste_temp WHERE id = ?");
             $stm->execute([$id]);
             return $stm->fetch()['reste'];
         }
@@ -70,7 +70,19 @@
             $stm = $this->db->prepare("INSERT INTO besoins_ville (id_ville, id_besoin, quantite) VALUES (?, ?, ?)");
             $stm->execute([$idVille, $besoin['id'], $quantite]);
         }
+        public function getByQuantiteAsc(){
+            $ret = $this->db->prepare("SELECT * FROM besoins_ville ORDER BY quantite ASC");
+            $ret->execute([$id]);
+
+            return $ret->fetchAll();
+        }
+
+        public function countBesoin($id){
+            $ret = $this->db->prepare("SELECT SUM(quantite) as count FROM besoins_ville WHERE id_besoin = ?");
+            $ret->execute([$id]);
+
+            return $ret->fetch();
+        }
         
     }
-
 ?>

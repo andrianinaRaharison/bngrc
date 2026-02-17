@@ -37,11 +37,10 @@
                 <div class="row">
 
                     <!-- VILLE 1 -->
-                    <?php foreach ($villes as $v) { ?>
-                        <div class="col-12 col-lg-6">
+                    <div class="col-12 col-lg-6">
                         <div class="card">
-                            <div class="card-header" name="id_ville" id="id_ville" value="<?= $v['id_ville'];?>">
-                                <h4><i class="bi bi-geo-alt-fill text-primary"></i> <?= $v['ville_nom'];?></h4>
+                            <div class="card-header">
+                                <h4><i class="bi bi-geo-alt-fill text-primary"></i> Antananarivo</h4>
                             </div>
 
                             <div class="card-body">
@@ -49,46 +48,39 @@
                                 <!-- Besoins -->
                                 <h6 class="text-danger">Besoins</h6>
                                 <ul class="list-group mb-3">
-                                    <?php foreach ($besoins[$v['id_ville']] as $b) { ?>
---                                     <li class="list-group-item d-flex justify-content-between">
---                                         <?= $b['libelle'];?>
---                                         <span class="badge bg-danger"><?= $b['quantite'];?></span>
---                                     </li>
---                                  <?php } ?>
-                                    <!-- <li class="list-group-item d-flex justify-content-between">
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        Kits alimentaires
+                                        <span class="badge bg-danger">500</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between">
                                         Médicaments
                                         <span class="badge bg-danger">200</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between">
                                         Couvertures
                                         <span class="badge bg-danger">300</span>
-                                    </li> -->
+                                    </li>
                                 </ul>
 
                                 <!-- Dons -->
                                 <h6 class="text-success">Dons attribués</h6>
-                                
                                 <ul class="list-group">
-                                    
-                                    <?php foreach ($dons[$v['id_ville']] as $d){?>
---                                      <li class="list-group-item d-flex justify-content-between">
---                                         <?= $d['libelle'];?>
---                                         <span class="badge bg-success"><?php echo $d['quantite']; ?></span>
---                                     </li>
---                                  <?php } ?>
-                                    <!-- <li class="list-group-item d-flex justify-content-between">
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        Kits alimentaires
+                                        <span class="badge bg-success">320</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between">
                                         Médicaments
                                         <span class="badge bg-success">150</span>
-                                    </li> -->
+                                    </li>
                                 </ul>
 
                             </div>
                         </div>
                     </div>
 
-                    <?php } ?>
                     <!-- VILLE 2 -->
-                    <!-- <div class="col-12 col-lg-6">
+                    <div class="col-12 col-lg-6">
                         <div class="card">
                             <div class="card-header">
                                 <h4><i class="bi bi-geo-alt-fill text-primary"></i> Toamasina</h4>
@@ -123,7 +115,7 @@
                             </div>
                         </div>
                     </div>
- -->
+
                 </div>
             </section>
         </div>

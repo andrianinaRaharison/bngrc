@@ -27,11 +27,9 @@
             $ret->execute([$idObjet, $quantite]);
         }   
         public function getDonsDispo(){
-            $dispatchModel = new DispatchModel($this->db);
-            $ret = Flight::db()->prepare("SELECT dons.*, dispatch.id_dons, get_don_reste(dons.id) as reste FROM dons LEFT JOIN dispatch ON dons.id = dispatch.id_dons WHERE get_don_reste(dons.id) > 0");
+            $ret = Flight::db()->prepare("SELECT dons.*, vdr.reste FROM dons JOIN v_don_reste vdr ON dons.id = vdr.id WHERE vdr.reste > 0");
             $ret->execute();
             return $ret->fetchAll();
-   
         }
 
         public function getById($id){
@@ -56,22 +54,30 @@
             }
             
             public function getMatchingDons($idObjet) {
-                $ret = Flight::db()->prepare("SELECT dons.*, get_don_reste(dons.id) as reste, ABS(get_don_reste(dons.id) - get_besoin_reste(bv.id)) AS diff FROM dons JOIN besoins b ON dons.id_objet = b.id_objet JOIN besoins_ville bv ON bv.id_besoin = b.id WHERE get_don_reste(dons.id) > 0 AND dons.id_objet = ? ORDER BY diff DESC LIMIT 1");
+                $ret = Flight::db()->prepare("SELECT dons.*, vdr.reste, ABS(vdr.reste - vbr.reste) AS diff FROM dons JOIN v_don_reste vdr ON dons.id = vdr.id JOIN besoins b ON dons.id_objet = b.id_objet JOIN besoins_ville bv ON bv.id_besoin = b.id JOIN v_besoin_reste vbr ON bv.id = vbr.id WHERE vdr.reste > 0 AND dons.id_objet = ? ORDER BY diff DESC LIMIT 1");
                 $ret->execute([$idObjet]);
                 return $ret->fetchAll();
             }
 
             // Méthodes pour simulation avec dispatch_temp
             public function getDonsDispoTemp(){
-                $ret = Flight::db()->prepare("SELECT dons.*, get_don_reste_temp(dons.id) as reste FROM dons WHERE get_don_reste_temp(dons.id) > 0");
+                $ret = Flight::db()->prepare("SELECT dons.*, vdrt.reste FROM dons JOIN v_don_reste_temp vdrt ON dons.id = vdrt.id WHERE vdrt.reste > 0");
                 $ret->execute();
                 return $ret->fetchAll();
             }
 
             public function getMatchingDonsTemp($idObjet) {
-                $ret = Flight::db()->prepare("SELECT dons.*, get_don_reste_temp(dons.id) as reste, ABS(get_don_reste_temp(dons.id) - get_besoin_reste_temp(bv.id)) AS diff FROM dons JOIN besoins b ON dons.id_objet = b.id_objet JOIN besoins_ville bv ON bv.id_besoin = b.id WHERE get_don_reste_temp(dons.id) > 0 AND dons.id_objet = ? ORDER BY diff DESC LIMIT 1");
+                $ret = Flight::db()->prepare("SELECT dons.*, vdrt.reste, ABS(vdrt.reste - vbrt.reste) AS diff FROM dons JOIN v_don_reste_temp vdrt ON dons.id = vdrt.id JOIN besoins b ON dons.id_objet = b.id_objet JOIN besoins_ville bv ON bv.id_besoin = b.id JOIN v_besoin_reste_temp vbrt ON bv.id = vbrt.id WHERE vdrt.reste > 0 AND dons.id_objet = ? ORDER BY diff DESC LIMIT 1");
                 $ret->execute([$idObjet]);
                 return $ret->fetchAll();
             }
+
+            public function getStock($id){
+                $ret = $this->db->prepare("SELECT reste AS stock FROM v_don_reste WHERE id = ?");
+                $ret->execute([$id]);
+                return $ret->fetch();
+            }
+
+
                 
     }
