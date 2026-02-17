@@ -61,6 +61,13 @@
             $stm->execute([$id]);
             return $stm->fetch()['reste'];
         }
+
+        public function getByBesoin($id) {
+            $stm = $this->db->prepare("SELECT * FROM besoins_ville WHERE id_besoin = ? AND get_besoin_reste(id) > 0");
+            $stm->execute([$id]);
+            return $stm->fetchAll();
+        }
+        
         public function insert() {
             $idVille = Flight::request()->data->ville_id;
             $idBesoin = Flight::request()->data->id_objet;
@@ -71,7 +78,15 @@
             $stm->execute([$idVille, $besoin['id'], $quantite]);
         }
 
-        
+        public function getInitBesoins() {
+            $bm = new BesoinModel(Flight::db());
+            $allB = $bm->getAll();
+            $data = [];
+            foreach($allB as $a) :
+                $data[] = $this->getByBesoin($a['id']);
+            endforeach;
+            return $data;
+        }
         
         public function getByQuantiteAsc(){
             $ret = $this->db->prepare("SELECT * FROM besoins_ville ORDER BY quantite ASC");
