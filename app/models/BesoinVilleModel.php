@@ -22,7 +22,7 @@
         }
 
         public function getByIdVille($id){
-            $ret = $this->db->prepare("SELECT v.*, get_besoin_reste(v.id) AS reste, o.libelle FROM v_besoin_ville_region v JOIN besoins b ON b.id = v.id_besoin JOIN objets o ON o.id = b.id_objet WHERE id_ville = ?");
+            $ret = $this->db->prepare("SELECT v.*, get_besoin_reste(v.id) AS reste, o.libelle FROM v_besoin_ville_region v JOIN besoins b ON b.id = v.id_besoin JOIN objets o ON o.id = b.id_objet WHERE id_ville = ? AND b.type_besoin != 3");
             $ret->execute([$id]);
 
             $data = $ret->fetchAll();
