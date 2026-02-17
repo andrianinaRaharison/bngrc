@@ -54,6 +54,13 @@
             $stm->execute([$id]);
             return $stm->fetch()['reste'];
         }
+
+        // Méthode pour simulation avec dispatch_temp
+        public function getResteBesoinsTemp($id) {
+            $stm = $this->db->prepare("SELECT get_besoin_reste_temp(?) as reste");
+            $stm->execute([$id]);
+            return $stm->fetch()['reste'];
+        }
         public function insert() {
             $idVille = Flight::request()->data->ville_id;
             $idBesoin = Flight::request()->data->id_objet;
