@@ -1,0 +1,1 @@
+ALTER TABLE config ADD prix2 FLOAT;

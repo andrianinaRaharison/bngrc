@@ -4,6 +4,7 @@
 
     use Flight;
     use app\models\AchatModel;
+    use app\models\BesoinModel;
 
     class AchatController{
 
@@ -14,6 +15,17 @@
             $achatVille = $achatModel->getByVille();
 
             Flight::render('achat', ['achatVille' => $achatVille]);
+        }
+
+        public function acheter() {
+            $idV = Flight::request()->data->id_ville;
+            $quantity = Flight::request()->data->id_ville;
+            $idB = Flight::request()->data->id_besoin;
+            $besoinM = new BesoinModel(Flight::db());
+            $besoin = $besoinM->getById($idB);
+            $achatModel = new AchatModel(Flight::db());
+            $prix = $quantity * $besoin['prix_unitaire'];
+            $prixttc = $achatModel->getFrais($prix);
         }
     }
 

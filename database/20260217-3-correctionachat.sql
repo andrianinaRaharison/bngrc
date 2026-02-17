@@ -1,0 +1,1 @@
+ALTER TABLE achat ADD prix_ttc FLOAT;

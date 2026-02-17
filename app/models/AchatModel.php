@@ -14,7 +14,7 @@
         }
 
         public function insert($data){
-            $ret = $this->db->prepare("INSERT INTO achat(id_besoin, daty, quantite, id_ville) VALUES (?,?,?,?)");
+            $ret = $this->db->prepare("INSERT INTO achat(id_besoin, daty, quantite, id_ville, prix_ttc) VALUES (?,?,?,?)");
             $ret->execute($data);
         }
 
@@ -26,8 +26,8 @@
         }
 
         public function getFrais($prix){
-            $ret = $this->db->prepare("SELECT (?*taux)+? FROM achat");
-            $ret->execute([$prix, $prix]);
+            $ret = $this->db->prepare("SELECT (?*taux)+? FROM achat WHERE prix <= ? AND prix > ?");
+            $ret->execute([$prix, $prix, $prix, $prix]);
 
             return $ret->fetch();
         }
