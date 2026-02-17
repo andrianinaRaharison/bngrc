@@ -39,6 +39,12 @@
                             <span>Recapitulatif financiere</span>
                         </a>
                     </li>
+                    <li class="sidebar-item">
+                        <a href="/simuler-dispatch" class="sidebar-link">
+                            <i class="bi bi-cart-fill"></i>
+                            <span>Simuler dispatch</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

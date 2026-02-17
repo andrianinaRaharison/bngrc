@@ -7,6 +7,7 @@ use app\controllers\DonController;
 use app\controllers\UniteController;
 use app\controllers\VilleController;
 use app\middlewares\SecurityHeadersMiddleware;
+use app\controllers\AchatController;
 use flight\Engine;
 use flight\net\Router;
 
@@ -24,14 +25,13 @@ $router->group('', function (Router $router) use ($app) {
 
     $router->get('/villes', [VilleController::class, 'renderAll']);
 
-    $router->get('/acheter-besoin', function () use ($app) {
-        $app->render('achatbesoin');
-    });
+    $router->get('/acheter-besoin', [AchatController::class, 'renderAll']);
     $router->get("/recap", [BesoinVilleController::class, 'recapitulatif']);
     $router->get('/declare-besoin', [BesoinVilleController::class, 'InfoForBesoinDeclaration']);
     $router->get('/api/unite/@id_objet', [BesoinController::class, 'getUniteForObject']);
     $router->get("/ville-besoin/@id", [VilleController::class, 'renderBesoinByVille']);
     $router->get('/donate', [UniteController::class, 'getAll']);
+    $router->post('/acheter', [AchatController::class, 'acheter']);
 
     $router->get('/dash', [BesoinVilleController::class, 'getVilleBesoin']);
 
