@@ -39,6 +39,15 @@
             Flight::render('dashboard', ['besoins' => $besoins, 'dons' => $dons, 'villes' => $villes]);
         }
 
+        public function recapitulatif(){
+            $besModel = new BesoinModel(Flight::db());
+
+            $total = $besModel->CalculBesoinTotal();
+            $satisfait = $besModel->CalculBesoinSatisfait();
+            $reste = $total['total'] - $satisfait['satisfait'];
+
+            Flight::render('recapitulation', ['total' => $total['total'], 'satisfait' => $satisfait['satisfait'], 'reste' => $reste]);
+        }
         public function InfoForBesoinDeclaration(){
             $besoinModel = new BesoinModel(Flight::db());
             $besoins = $besoinModel->getAllWithObject();

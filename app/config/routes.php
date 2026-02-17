@@ -28,10 +28,12 @@ $router->group('', function(Router $router) use ($app) {
 		$app->render('achatbesoin');
 	});
   
-  $router->get('/declare-besoin', function() use ($app) {
+  	$router->get('/declare-besoin', function() use ($app) {
 		$app->render('declarebesoin');
 	});
 	
+	$router->get("/recap", [BesoinVilleController::class, 'recapitulatif']);
+
 	$router->get("/ville-besoin/@id", [VilleController::class, 'renderBesoinByVille']);
 
   $router->get('/declare-besoin', [BesoinVilleController::class, 'InfoForBesoinDeclaration']);
