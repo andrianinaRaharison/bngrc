@@ -10,10 +10,10 @@ INSERT INTO objets (libelle, id_unite) VALUES
 ('Médicaments', 3); -- id 5 (pièce)
 
 INSERT INTO besoins (id_objet, prix_unitaire) VALUES 
-(1, 125000, 1), -- Riz (par sac)
-(2, 8000,1),   -- Huile (par litre)
-(3, 1500, 1),   -- Savon (par pièce)
-(4, 450000, 2); -- Tente (par pièce)
+(1, 125000), -- Riz (par sac)
+(2, 8000),   -- Huile (par litre)
+(3, 1500),   -- Savon (par pièce)
+(4, 450000); -- Tente (par pièce)
 
 INSERT INTO region (nom) VALUES ('Analamanga'), ('Atsinanana');
 
@@ -22,7 +22,7 @@ INSERT INTO ville (nom, id_region) VALUES
 ('Toamasina', 2),
 ('Fenerive Est', 2);
 
-INSERT INTO dons (id_objet, daty, quantite) VALUES 
+INSERT INTO dons (id_objet, daty, quantite, id_type) VALUES 
 (1, '2026-02-16 08:00:00', 50, 1), -- Un don de Riz
 (1, '2026-02-16 09:15:00', 50, 1), -- Un autre don de Riz
 (2, '2026-02-16 10:00:00', 25, 1), -- Un don d'Huile
