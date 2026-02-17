@@ -95,23 +95,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Progression globale de satisfaction</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="progress progress-primary mb-4" style="height: 25px;">
-                                    <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" 
-                                         role="progressbar" style="width: 64%" 
-                                         aria-valuenow="64" aria-valuemin="0" aria-valuemax="100">64%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </section>
         </div>
 
@@ -120,31 +103,9 @@
     </div>
 </div>
 
+<script src="/assets/js/pages/recapitulation.js"></script>
 <script src="/assets/static/js/components/dark.js"></script>
 <script src="/assets/compiled/js/app.js"></script>
-
-<script>
-document.getElementById('btn-refresh').addEventListener('click', function() {
-    const btn = this;
-    const icon = btn.querySelector('i');
-    
-    // Animation de rotation
-    icon.classList.add('bi-spin'); // Assurez-vous d'avoir un CSS pour la rotation ou gérez-le manuellement
-    btn.disabled = true;
-
-    // Simulation d'appel AJAX
-    setTimeout(() => {
-        // Ici vous feriez votre fetch() vers votre API/PHP
-        console.log("Données actualisées");
-        
-        // Exemple de mise à jour DOM
-        // document.getElementById('total-amount').innerText = "Nouveau Montant";
-        
-        icon.classList.remove('bi-spin');
-        btn.disabled = false;
-    }, 1000);
-});
-</script>
 
 <style>
 /* Petite animation pour le bouton refresh */
